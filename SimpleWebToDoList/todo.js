@@ -10,21 +10,30 @@ function get_todos(){
 function add(){
 	var d = new Date();
 
-	var task = document.getElementById('task').value + '     ' + '(' 
-		+ '<b>Added: </b>'+ d.getMonth() + '-' + d.getDay() + '-' + d.getFullYear() + ')';
+	//var task = document.getElementById('task').value + '     ' + '(' 
+	//	+ '<b>Added: </b>'+ d.getMonth() + '-' + d.getDay() + '-' + d.getFullYear() + ')';
+
+	var n = d.toDateString();
+	if(document.getElementById('task').value != ''){
+		var task = '<span>' + document.getElementById('task').value+ '</span>' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + '<span>' + '('
+			+ '<b>Added: </b>' + n + ')</span>';
 	
-	var todos = get_todos();
-	todos.push(task);
-	localStorage.setItem('todo', JSON.stringify(todos));
-	document.getElementById('task').value = '';
+		var todos = get_todos();
+		todos.push(task);
+		localStorage.setItem('todo', JSON.stringify(todos));
+		document.getElementById('task').value = null;
 	
-	show();
+		show();
+	} else {
+		alert("You must enter something!");
+	}
 	
 	return false;
 }
 
 function remove(){
 	var id = this.getAttribute('id');
+	console.log(id);
 	var todos = get_todos();
 	todos.splice(id, 1);
 	localStorage.setItem('todo', JSON.stringify(todos));
@@ -39,7 +48,7 @@ function show(){
 	
 	var html = '<ol>';
 	for (var i = 0; i< todos.length; i++){
-		html += '<li>' + todos[i] + ' ' + ' <button class="remove"' + i + '">x</button></li>';
+		html += '<li id="list">' + todos[i] + '<span><button class="remove" id ="' + i + '">x</button></span></li>';
 	};
 	
 	html += '</ol>';
@@ -51,5 +60,6 @@ function show(){
 		buttons[i].addEventListener('click', remove);
 	};
 }
+
 
 show();
