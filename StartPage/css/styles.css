@@ -1,0 +1,25 @@
+/* Work in progress */
+body {
+    /* background: url("../background.gif") no-repeat center center fixed;
+    background-size: cover; */
+}
+
+video {
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+   	z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+	background: url('../ship.jpg') no-repeat;
+	background-size: cover;
+  	-webkit-transition: 1s opacity;
+  	transition: 1s opacity;    position: fixed;
+}
+
+.stopfade {
+	opacity: .5;
+}
